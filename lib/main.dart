@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:topicostarde/producto.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,10 +33,37 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
+  List<Producto> productos = [
+    Producto(codigo: "001", nombre: "Coca Cola", precio: 1.5),
+    Producto(codigo: "002", nombre: "Pepsi", precio: 1.5),
+    Producto(codigo: "003", nombre: "Fanta", precio: 1.5),
+    Producto(codigo: "004", nombre: "Sprite", precio: 1.5),
+    Producto(codigo: "005", nombre: "Manaos", precio: 1.5),
+    Producto(codigo: "006", nombre: "Seven up", precio: 1.5),
+    Producto(codigo: "007", nombre: "Pepsi Light", precio: 1.5),
+    Producto(codigo: "008", nombre: "Coca Cola Light", precio: 1.5),
+    Producto(codigo: "009", nombre: "Fanta Naranja", precio: 1.5),
+    Producto(codigo: "010", nombre: "Fanta Limon", precio: 1.5),
+    Producto(codigo: "011", nombre: "Fanta Uva", precio: 1.5),
+  ];
+
   void _incrementCounter() {
     setState(() {
       _counter++;
     });
+  }
+
+  Widget textoInicio(Producto producto) {
+    return Text(
+      producto.nombre +
+          '\n' +
+          producto.codigo +
+          '\n' +
+          producto.precio.toString(),
+      style: GoogleFonts.lato(
+        fontSize: 18,
+      ),
+    );
   }
 
   @override
@@ -44,86 +73,15 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Row(
-            children: [
-              Expanded(
-                child: Container(
-                  margin: EdgeInsets.only(
-                    left: 10,
-                    right: 5,
-                  ),
-                  height: 80,
-                  width: 80,
-                  color: Colors.orange,
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  margin: EdgeInsets.only(
-                    left: 5,
-                    right: 10,
-                  ),
-                  height: 80,
-                  width: 80,
-                  color: Colors.green,
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: Container(
-                  margin: EdgeInsets.symmetric(
-                    horizontal: 10,
-                  ),
-                  height: 80,
-                  color: Colors.pink,
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Row(
-            children: [
-              Container(
-                margin: EdgeInsets.only(
-                  left: 10,
-                  right: 5,
-                ),
-                height: 80,
-                width: (size.width - 40) / 3,
-                color: Colors.teal,
-              ),
-              Container(
-                margin: EdgeInsets.only(
-                  left: 5,
-                  right: 5,
-                ),
-                height: 80,
-                width: (size.width - 40) / 3,
-                color: Colors.blue,
-              ),
-              Container(
-                margin: EdgeInsets.only(
-                  left: 5,
-                  right: 10,
-                ),
-                height: 80,
-                width: (size.width - 40) / 3,
-                color: Colors.yellow,
-              ),
-            ],
-          ),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: productos
+              .map(
+                (producto) => textoInicio(producto),
+              )
+              .toList(),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
@@ -132,4 +90,8 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+}
+
+dynamic algo(e) {
+  return null;
 }
