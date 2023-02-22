@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:topicostarde/producto.dart';
+import 'package:topicostarde/vistas/crear_producto.dart';
 import 'package:topicostarde/vistas/ver_productos.dart';
 
 class MenuPage extends StatelessWidget {
@@ -31,7 +32,19 @@ class MenuPage extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.teal,
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (c) {
+                      return CrearProducto();
+                    },
+                  ),
+                ).then((value) {
+                  Producto producto = value;
+                  productos.add(producto);
+                });
+              },
               child: Text(
                 'Crear Producto',
               ),
