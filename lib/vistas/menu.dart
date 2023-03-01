@@ -41,8 +41,10 @@ class MenuPage extends StatelessWidget {
                     },
                   ),
                 ).then((value) {
-                  Producto producto = value;
-                  productos.add(producto);
+                  if (value != null) {
+                    Producto producto = value;
+                    productos.add(producto);
+                  }
                 });
               },
               child: Text(
