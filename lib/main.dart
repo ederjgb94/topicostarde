@@ -9,26 +9,15 @@ void main() async {
   runApp(const MyApp());
 
   await Hive.initFlutter();
-  var box = await Hive.openBox('testBox');
 
-  box.put('producto', {
-    'nombre': 'Coca Cola',
-    'precio': 10.10,
-    'algo': {
-      'foo': 'bar',
-      'Zar': 20,
-      'arr': ['A', 'B'],
-      'location': {
-        'city': 'Tucson',
-        'state': 'AZ',
-      },
-    },
-    'cantidad': 10,
-    'descripcion': 'Bebida gaseosa',
-  });
+  Hive.registerAdapter(ProductoAdapter());
+  var box = await Hive.openBox('productos');
 
-  var producto = box.get('producto');
-  print(producto['algo']['arr'][1]);
+  box.put('p1', Producto(codigo: 'p1', nombre: 'Papas', precio: 1.5));
+  box.put('p2', Producto(codigo: 'p2', nombre: 'Coca', precio: 3.5));
+
+  print(box.values);
+  box.close();
 }
 
 class MyApp extends StatelessWidget {
