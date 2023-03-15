@@ -6,18 +6,11 @@ import 'package:topicostarde/vistas/menu.dart';
 import 'package:topicostarde/vistas/ver_productos.dart';
 
 void main() async {
-  runApp(const MyApp());
-
   await Hive.initFlutter();
-
   Hive.registerAdapter(ProductoAdapter());
-  var box = await Hive.openBox('productos');
+  var box = await Hive.openBox<Producto>('productos');
 
-  box.put('p1', Producto(codigo: 'p1', nombre: 'Papas', precio: 1.5));
-  box.put('p2', Producto(codigo: 'p2', nombre: 'Coca', precio: 3.5));
-
-  print(box.values);
-  box.close();
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

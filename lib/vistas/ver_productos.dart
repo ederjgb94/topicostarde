@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:topicostarde/producto.dart';
 import 'package:topicostarde/widgets/producto_widget.dart';
 
 class VerProductosPage extends StatefulWidget {
-  final List<Producto> productos;
   const VerProductosPage({
     super.key,
-    required this.productos,
   });
 
   @override
@@ -39,6 +38,8 @@ class _VerProductosPageState extends State<VerProductosPage> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    var box = Hive.box<Producto>('productos');
+    var productos = box.values.toList();
     return Scaffold(
       appBar: AppBar(
         title: Text('Ver Productos'),
@@ -46,7 +47,7 @@ class _VerProductosPageState extends State<VerProductosPage> {
       body: Container(
         child: ListView(
           // crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: widget.productos
+          children: productos
               .map(
                 (producto) => regresarProducto(producto),
               )

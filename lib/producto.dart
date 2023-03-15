@@ -1,8 +1,12 @@
 import 'package:hive_flutter/hive_flutter.dart';
 
-class Producto {
+@HiveType(typeId: 0)
+class Producto extends HiveObject {
+  @HiveField(0)
   String codigo;
+  @HiveField(1)
   String nombre;
+  @HiveField(2)
   double precio;
 
   Producto({
@@ -24,9 +28,9 @@ class ProductoAdapter extends TypeAdapter<Producto> {
   @override
   Producto read(BinaryReader reader) {
     return Producto(
-      codigo: reader.read(0),
-      nombre: reader.read(1),
-      precio: reader.read(2),
+      codigo: reader.read(),
+      nombre: reader.read(),
+      precio: reader.read(),
     );
   }
 
