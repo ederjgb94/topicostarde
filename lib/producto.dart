@@ -9,6 +9,8 @@ class Producto extends HiveObject {
   @HiveField(2)
   double precio;
 
+  int cantidad = 0;
+
   Producto({
     required this.codigo,
     required this.nombre,

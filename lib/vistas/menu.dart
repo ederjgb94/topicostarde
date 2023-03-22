@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:topicostarde/producto.dart';
+import 'package:topicostarde/vistas/carrito.dart';
 import 'package:topicostarde/vistas/crear_producto.dart';
 import 'package:topicostarde/vistas/ver_productos.dart';
 
@@ -57,6 +58,19 @@ class MenuPage extends StatelessWidget {
               child: Text(
                 'Ver Producto',
               ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (c) {
+                      return CarritoPage();
+                    },
+                  ),
+                );
+              },
+              child: Text('Carrito'),
             ),
           ],
         ),
