@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -31,10 +32,17 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _cont = 0;
+  bool _isRed = true;
 
   void increment() {
     setState(() {
       _cont++;
+    });
+  }
+
+  void changeColor() {
+    setState(() {
+      _isRed = !_isRed;
     });
   }
 
@@ -57,78 +65,128 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         elevation: 0,
       ),
-      body: Container(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 30,
-            vertical: 20,
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Welcome!',
-                  textAlign: TextAlign.end,
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xff384B70),
-                  ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 30,
+          vertical: 20,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Welcome!',
+                textAlign: TextAlign.end,
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xff384B70),
                 ),
               ),
-              const SizedBox(
-                height: 30,
-              ),
-              const Align(
-                alignment: Alignment.centerLeft,
-                child: Text('Email'),
-              ),
-              const TextField(
-                decoration: InputDecoration(
-                    contentPadding: EdgeInsets.symmetric(
-                      horizontal: 10,
-                    ),
-                    border: OutlineInputBorder(),
-                    hintText: 'Enter your email'),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const Align(
-                alignment: Alignment.centerLeft,
-                child: Text('Password'),
-              ),
-              const TextField(
-                obscureText: true,
-                decoration: InputDecoration(
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            const Align(
+              alignment: Alignment.centerLeft,
+              child: Text('Email'),
+            ),
+            const TextField(
+              decoration: InputDecoration(
                   contentPadding: EdgeInsets.symmetric(
                     horizontal: 10,
                   ),
                   border: OutlineInputBorder(),
-                  hintText: 'Enter your password',
+                  hintText: 'Enter your email'),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            const Align(
+              alignment: Alignment.centerLeft,
+              child: Text('Password'),
+            ),
+            const TextField(
+              obscureText: true,
+              decoration: InputDecoration(
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: 10,
+                ),
+                border: OutlineInputBorder(),
+                hintText: 'Enter your password',
+                suffixIcon: Icon(
+                  Icons.visibility,
                 ),
               ),
-              TextButton(
+            ),
+            Align(
+              alignment: Alignment.centerRight,
+              child: TextButton(
                 onPressed: () {},
-                child: const Text('Forgot Passowrd?'),
+                child: const Text(
+                  'Forgot Passowrd?',
+                  style: TextStyle(
+                    color: Color(0xffFFA851),
+                  ),
+                ),
               ),
-              ElevatedButton(
-                onPressed: () {},
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {
+                  changeColor();
+                },
+                style: ElevatedButton.styleFrom(
+                  elevation: 0,
+                  backgroundColor: const Color(0xffFF8100),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 15,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                ),
                 child: const Text('Login'),
               ),
-              Row(
-                children: [
-                  const Text('Don\'t have an account?'),
-                  TextButton(
-                    onPressed: () {},
-                    child: const Text('Sign Up'),
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text('Don\'t have an account?'),
+                TextButton(
+                  onPressed: () {},
+                  child: const Text(
+                    'Sign Up',
+                    style: TextStyle(
+                      color: Color(0xffFFA851),
+                      decoration: TextDecoration.underline,
+                    ),
                   ),
-                ],
+                ),
+              ],
+            ),
+            AnimatedCrossFade(
+              firstChild: const Icon(
+                Icons.home,
+                size: 40,
               ),
-            ],
-          ),
+              secondChild: const Icon(
+                Icons.lock,
+                size: 40,
+              ),
+              duration: const Duration(seconds: 1),
+              crossFadeState:
+                  _isRed ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+            ),
+          ],
         ),
       ),
     );
