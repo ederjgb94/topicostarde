@@ -37,6 +37,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   google_fonts: ^4.0.3
   hive_flutter: ^1.1.0
+  shrink_sidemenu: ^2.0.0+2-null-safety
+  delayed_display: ^2.0.0
 
 dev_dependencies:
   flutter_test:
