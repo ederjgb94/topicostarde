@@ -20,7 +20,7 @@ class HomeView extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) {
-                  return const SaludosView();
+                  return SaludosView();
                 },
               ),
             );

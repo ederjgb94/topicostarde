@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
 import 'package:topicostarde/vistas/home_view.dart';
+import 'package:topicostarde/vistas/saludos_view.dart';
 
 void main() async {
   runApp(const MyApp());
