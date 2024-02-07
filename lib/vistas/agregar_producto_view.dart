@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:topicostarde/modelos/producto_model.dart';
 
 class AgregarProductoView extends StatelessWidget {
-  AgregarProductoView({Key? key}) : super(key: key);
+  final List<Producto> productos;
+  AgregarProductoView({Key? key, required this.productos}) : super(key: key);
   final TextEditingController idcontroller = TextEditingController();
   final TextEditingController nombrecontroller = TextEditingController();
   final TextEditingController preciocontroller = TextEditingController();
@@ -48,8 +50,9 @@ class AgregarProductoView extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            const TextField(
-              decoration: InputDecoration(
+            TextField(
+              controller: preciocontroller,
+              decoration: const InputDecoration(
                 border: OutlineInputBorder(),
               ),
             ),
@@ -58,7 +61,15 @@ class AgregarProductoView extends StatelessWidget {
             ),
             Center(
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  final Producto producto = Producto(
+                    id: idcontroller.text,
+                    nombre: nombrecontroller.text,
+                    precio: double.parse(preciocontroller.text),
+                  );
+                  productos.add(producto);
+                  Navigator.pop(context);
+                },
                 child: const Text(
                   'Agregar Producto',
                 ),

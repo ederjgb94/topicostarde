@@ -60,7 +60,9 @@ class HomeView extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return AgregarProductoView();
+                      return AgregarProductoView(
+                        productos: productos,
+                      );
                     },
                   ),
                 );
