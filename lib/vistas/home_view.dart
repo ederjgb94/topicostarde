@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:topicostarde/modelos/producto_model.dart';
 import 'package:topicostarde/vistas/agregar_producto_view.dart';
 import 'package:topicostarde/vistas/saludos_view.dart';
@@ -66,6 +67,23 @@ class HomeView extends StatelessWidget {
                     },
                   ),
                 );
+              },
+            ),
+            const SizedBox(height: 20),
+            CustomButtonHome(
+              name: 'Test Hive',
+              color: Colors.blue,
+              onPressed: () async {
+                await Hive.initFlutter();
+                await Hive.openBox('myBox');
+
+                var box = Hive.box('myBox');
+
+                box.put('name', 'David');
+
+                var name = box.get('name');
+
+                print('Name: $name');
               },
             ),
           ],
