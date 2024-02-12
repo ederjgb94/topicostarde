@@ -73,17 +73,9 @@ class HomeView extends StatelessWidget {
             CustomButtonHome(
               name: 'Test Hive',
               color: Colors.blue,
-              onPressed: () async {
-                await Hive.initFlutter();
-                await Hive.openBox('myBox');
-
-                var box = Hive.box('myBox');
-
-                box.put('name', 'David');
-
-                var name = box.get('name');
-
-                print('Name: $name');
+              onPressed: () {
+                var productosBox = Hive.box('productos');
+                print('Productos: ${productosBox.values}');
               },
             ),
           ],

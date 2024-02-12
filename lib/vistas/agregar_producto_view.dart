@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:topicostarde/controladores/agregar_productos_controller.dart';
 import 'package:topicostarde/modelos/producto_model.dart';
 
 class AgregarProductoView extends StatelessWidget {
@@ -7,6 +8,8 @@ class AgregarProductoView extends StatelessWidget {
   final TextEditingController idcontroller = TextEditingController();
   final TextEditingController nombrecontroller = TextEditingController();
   final TextEditingController preciocontroller = TextEditingController();
+  final AgregarProductosController agregarProductosController =
+      AgregarProductosController();
 
   @override
   Widget build(BuildContext context) {
@@ -62,12 +65,17 @@ class AgregarProductoView extends StatelessWidget {
             Center(
               child: ElevatedButton(
                 onPressed: () {
-                  final Producto producto = Producto(
+                  // final Producto producto = Producto(
+                  //   id: idcontroller.text,
+                  //   nombre: nombrecontroller.text,
+                  //   precio: double.parse(preciocontroller.text),
+                  // );
+                  // productos.add(producto);
+                  agregarProductosController.agregarProducto(
                     id: idcontroller.text,
                     nombre: nombrecontroller.text,
-                    precio: double.parse(preciocontroller.text),
+                    precio: preciocontroller.text,
                   );
-                  productos.add(producto);
                   Navigator.pop(context);
                 },
                 child: const Text(

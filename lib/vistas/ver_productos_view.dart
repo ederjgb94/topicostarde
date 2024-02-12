@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:topicostarde/controladores/ver_productos_controller.dart';
 import 'package:topicostarde/modelos/producto_model.dart';
 
 class VerProductosView extends StatelessWidget {
   final List<Producto> productos;
-  const VerProductosView({
+  final VerProductosController verProductosController =
+      VerProductosController();
+  VerProductosView({
     Key? key,
     required this.productos,
   }) : super(key: key);
@@ -13,7 +16,8 @@ class VerProductosView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Ver productos')),
       body: Column(
-        children: productos
+        children: verProductosController
+            .verProductos()
             .map(
               (Producto producto) => ListTile(
                 leading: CircleAvatar(

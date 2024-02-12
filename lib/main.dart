@@ -8,6 +8,8 @@ import 'package:topicostarde/vistas/home_view.dart';
 import 'package:topicostarde/vistas/saludos_view.dart';
 
 void main() async {
+  await Hive.initFlutter();
+  await Hive.openBox('productos');
   runApp(const MyApp());
 }
 
