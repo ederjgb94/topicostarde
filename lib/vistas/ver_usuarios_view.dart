@@ -12,29 +12,54 @@ class VerUsuarios extends StatelessWidget {
     return usuarios.docs.map((document) => document.data()).toList();
   }
 
+  //leer usuarios en forma de stream
+  Stream<QuerySnapshot> _getUsuariosStream() {
+    var db = FirebaseFirestore.instance;
+    return db.collection('users').snapshots();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Usuarios')),
       body: Center(
-        child: FutureBuilder(
-            future: _getUsuarios(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const CircularProgressIndicator();
-              } else {
-                return ListView.builder(
-                  itemCount: snapshot.data?.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text(
-                        snapshot.data![index]['first'],
-                      ),
-                    );
-                  },
-                );
-              }
-            }),
+        child: StreamBuilder(
+          stream: _getUsuariosStream(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const CircularProgressIndicator();
+            } else {
+              return ListView.builder(
+                itemCount: snapshot.data?.docs.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: Text(
+                      snapshot.data!.docs[index]['first'],
+                    ),
+                  );
+                },
+              );
+            }
+          },
+        ),
+        // child: FutureBuilder(
+        //     future: _getUsuarios(),
+        //     builder: (context, snapshot) {
+        //       if (snapshot.connectionState == ConnectionState.waiting) {
+        //         return const CircularProgressIndicator();
+        //       } else {
+        //         return ListView.builder(
+        //           itemCount: snapshot.data?.length,
+        //           itemBuilder: (context, index) {
+        //             return ListTile(
+        //               title: Text(
+        //                 snapshot.data![index]['first'],
+        //               ),
+        //             );
+        //           },
+        //         );
+        //       }
+        //     }),
       ),
     );
   }
