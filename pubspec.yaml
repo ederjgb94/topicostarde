@@ -39,6 +39,9 @@ dependencies:
   hive_flutter: ^1.1.0
   shrink_sidemenu: ^2.0.0+2-null-safety
   delayed_display: ^2.0.0
+  firebase_core: ^2.24.2
+  cloud_firestore: ^4.14.0
+  faker: ^2.1.0
 
 dev_dependencies:
   flutter_test:

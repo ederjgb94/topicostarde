@@ -6,10 +6,16 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
 import 'package:topicostarde/vistas/home_view.dart';
 import 'package:topicostarde/vistas/saludos_view.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 void main() async {
   await Hive.initFlutter();
   await Hive.openBox('productos');
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 

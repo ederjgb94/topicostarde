@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "798236392432",
+    "project_id": "nubetardebonita",
+    "storage_bucket": "nubetardebonita.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:798236392432:android:19b2cbeba3c0d6e518bb35",
+        "android_client_info": {
+          "package_name": "com.example.topicostarde"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2nrwOLDuvKMe7mZldyOCjI9qm76HXfpc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
