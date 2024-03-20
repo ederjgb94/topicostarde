@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:topicostarde/modelos/producto_model.dart';
 import 'package:topicostarde/vistas/agregar_producto_view.dart';
+import 'package:topicostarde/vistas/crea_usuario_view.dart';
 import 'package:topicostarde/vistas/saludos_view.dart';
 import 'package:topicostarde/vistas/ver_productos_view.dart';
 import 'package:topicostarde/vistas/ver_usuarios_view.dart';
@@ -114,7 +115,24 @@ class HomeView extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return const VerUsuarios();
+                      return VerUsuarios();
+                    },
+                  ),
+                );
+              },
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            CustomButtonHome(
+              name: 'CrearUsuarioView',
+              color: Colors.yellow,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return CrearUsuarioView();
                     },
                   ),
                 );

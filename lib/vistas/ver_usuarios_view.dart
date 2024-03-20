@@ -2,7 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class VerUsuarios extends StatelessWidget {
-  const VerUsuarios({Key? key}) : super(key: key);
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
+  TextEditingController bornController = TextEditingController();
+  VerUsuarios({Key? key}) : super(key: key);
 
   Future<List> _getUsuarios() async {
     var db = FirebaseFirestore.instance;
@@ -35,6 +38,85 @@ class VerUsuarios extends StatelessWidget {
                   return ListTile(
                     title: Text(
                       snapshot.data!.docs[index]['first'],
+                    ),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.edit),
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: const Text('Editar Usuario'),
+                                  content: SingleChildScrollView(
+                                    child: Column(
+                                      children: <Widget>[
+                                        const Text('FirstName'),
+                                        TextField(
+                                          controller: firstNameController
+                                            ..text = snapshot.data!.docs[index]
+                                                ['first'],
+                                          // controller: firstNameController =
+                                          //     TextEditingController(
+                                          //         text: snapshot.data!
+                                          //             .docs[index]['first']),
+                                        ),
+                                        const Text('LastName'),
+                                        TextField(
+                                          controller: lastNameController
+                                            ..text = snapshot.data!.docs[index]
+                                                ['last'],
+                                        ),
+                                        const Text('Born'),
+                                        TextField(
+                                          controller: bornController
+                                            ..text = snapshot.data!.docs[index]
+                                                ['born'],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: const Text('Cancelar'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        var db = FirebaseFirestore.instance;
+                                        db
+                                            .collection('users')
+                                            .doc(snapshot.data!.docs[index].id)
+                                            .update({
+                                          'first': firstNameController.text,
+                                          'last': lastNameController.text,
+                                          'born': bornController.text,
+                                        });
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: const Text('Guardar'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.delete),
+                          onPressed: () {
+                            var db = FirebaseFirestore.instance;
+                            db
+                                .collection('users')
+                                .doc(snapshot.data!.docs[index].id)
+                                .delete();
+                          },
+                        ),
+                      ],
                     ),
                   );
                 },
